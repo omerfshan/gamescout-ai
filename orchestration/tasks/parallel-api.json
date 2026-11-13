@@ -1,0 +1,9 @@
+{
+  "id": "parallel-demo-api",
+  "title": "Orkestra paralel backend görevi denemesi",
+  "prompt": "Bu yalnızca orkestra testidir, GameScout geliştirmesi değildir. Yalnızca demo/api.txt dosyasını oluştur. İçeriği tam olarak API READY ve ardından yeni satır olsun. Commit/push/deploy yapma.",
+  "provider": "antigravity",
+  "allowed_paths": ["demo/api.txt"],
+  "depends_on": [],
+  "checks": [["python3", "-c", "from pathlib import Path; assert Path('demo/api.txt').read_text() == 'API READY\\n'"]]
+}

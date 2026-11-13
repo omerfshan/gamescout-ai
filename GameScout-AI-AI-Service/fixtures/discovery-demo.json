@@ -1,0 +1,39 @@
+{
+  "schema_version": "1.0.0",
+  "data_origin": "synthetic_demo",
+  "games": [
+    {
+      "game_id": "demo-android-1",
+      "platform": "android",
+      "external_app_id": "demo.puzzle",
+      "title": "DEMO Puzzle Garden",
+      "developer_profile": "indie",
+      "source_record_id": "source-demo-android-1",
+      "normalized_genres": [
+        "puzzle"
+      ]
+    },
+    {
+      "game_id": "demo-ios-1",
+      "platform": "ios",
+      "external_app_id": "demo.puzzle",
+      "title": "DEMO Puzzle Garden iOS",
+      "developer_profile": "unknown",
+      "source_record_id": "source-demo-ios-1",
+      "normalized_genres": [
+        "puzzle"
+      ]
+    },
+    {
+      "game_id": "demo-android-2",
+      "platform": "android",
+      "external_app_id": "demo.racer",
+      "title": "DEMO Pocket Racer",
+      "developer_profile": "small_team",
+      "source_record_id": "source-demo-android-2",
+      "normalized_genres": [
+        "racing"
+      ]
+    }
+  ]
+}

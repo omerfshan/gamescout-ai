@@ -1,0 +1,18 @@
+{
+  "id": "stage0-contracts",
+  "title": "Aşama 0: kanıt ve rapor sözleşmeleri",
+  "provider": "antigravity",
+  "allowed_paths": [
+    "contracts",
+    "fixtures/synthetic"
+  ],
+  "depends_on": [],
+  "checks": [
+    [
+      "python3",
+      "-c",
+      "from pathlib import Path; import json; paths=list(Path('contracts').glob('*.json')); assert len(paths)>=3; [json.loads(p.read_text()) for p in paths]; f=json.loads(Path('fixtures/synthetic/research-demo.json').read_text()); assert f.get('data_origin')=='synthetic_demo'; assert len(f.get('games',[]))>=2"
+    ]
+  ],
+  "prompt": "Yalnızca Project.md Aşama 0 sözleşmelerini uygula. contracts/evidence.schema.json, report.schema.json, research-scope.schema.json dosyalarını JSON Schema draft 2020-12 olarak tanımla; schema_version, provenance, observation/calculation/hypothesis ayrımı, evidence_ids, unknown/null, ülke/dil/tarih/birim ve sentetik ayrımı korunsun. report bulgularında id,kind,statement,evidence_ids,limitations,method_version olsun. fixtures/synthetic/research-demo.json içinde data_origin=synthetic_demo, en az iki açıkça uydurma DEMO oyun, kaynak kimlikli örnek kanıt ve sınırlı rapor olsun; gerçek kaynak URL uydurma. Tek snapshot trendi insufficient_data göster. contracts/README.md ve fixtures/synthetic/README.md dosyalarında şema alanları, fixture eşlemesi, validation ve sınırlamalar açık olsun. JSON şemaları ile fixture yapısı uyumlu olsun; gerekirse fixture için ek şema tanımla. Python jsonschema varsa fixture'ı doğrula; yoksa doğrulanmadığını belirt, paket kurma. Canlı API/scraping/model yok. API sözleşmeleri öneridir çalışan endpoint iddiası yazma. Commit/push/deploy yok. Başka dosyalara dokunma."
+}

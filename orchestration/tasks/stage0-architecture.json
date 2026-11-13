@@ -1,0 +1,23 @@
+{
+  "id": "stage0-architecture",
+  "title": "Aşama 0: servis sınırları ve repo iskeleti",
+  "provider": "antigravity",
+  "allowed_paths": [
+    "docs/adr",
+    "docs/runbooks/local-setup.md",
+    "docs/sources/provider-template.md",
+    "GameScout-AI-Backend/README.md",
+    "GameScout-AI-Fronted/README.md",
+    "GameScout-AI-AI-Service/README.md",
+    "infra/README.md"
+  ],
+  "depends_on": [],
+  "checks": [
+    [
+      "python3",
+      "-c",
+      "from pathlib import Path; import json; required=['docs/adr/0001-service-ownership.md','docs/adr/0002-runtime-versions.md','docs/runbooks/local-setup.md','docs/sources/provider-template.md','GameScout-AI-Backend/README.md','GameScout-AI-Fronted/README.md','GameScout-AI-AI-Service/README.md']; assert all(Path(p).is_file() and len(Path(p).read_text())>100 for p in required)"
+    ]
+  ],
+  "prompt": "Yalnızca Project.md Aşama 0 mimari ve iskeletini uygula. Türkçe belgeler yaz. GameScout-AI-Backend/README.md, GameScout-AI-Fronted/README.md, GameScout-AI-AI-Service/README.md, infra/README.md oluştur; henüz framework kurulumu veya çalışan servis iddiası yok. docs/adr/0001-service-ownership.md içinde Laravel iş verileri / Python AI job-checkpoint / React yalnız Laravel / Redis PHP job Python tüketmez / idempotency ve reconciliation sınırlarını açıkla. docs/adr/0002-runtime-versions.md içinde PHP/Laravel, Node/React/TS, Python/FastAPI/LangGraph, Postgres/Redis/Ollama için uyumlu aday sürüm seçme kriterlerini ve açık doğrulama listesini yaz. Resmi dokümana erişemiyorsan sürüm doğrulandı deme, seçimi pending bırak. docs/runbooks/local-setup.md içinde önkoşullar, sonraki kurulum sırası, servis portlarının loopback ve secrets placeholder kuralı, henüz çalıştırılmadı durumunu ve sıradaki tek dikey dilimi yaz. docs/sources/provider-template.md resmi belge, izin, tarih, alan kapsamı, kota ve gerçek cevap doğrulama alanlarını içersin. SOLID: port/adaptör sınırlarını somut örneklerle tarif et fakat gereksiz implementation üretme. Canlı scraping, paket kurma, commit/push/deploy yok. Başka dosyalara dokunma."
+}

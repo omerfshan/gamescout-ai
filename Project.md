@@ -5,9 +5,11 @@
 
 ## Amaç ve ürün sınırı
 
-GameScout AI, Android ve iOS oyunlarını seçilmiş bir araştırma kapsamında inceleyen, kanıt bağlantılarıyla pazar araştırması ve fırsat hipotezleri sunan bir market intelligence platformudur. Kullanıcı hangi verinin gözlem, hangisinin hesaplama ve hangisinin AI yorumu olduğunu görebilmelidir. Sistem oyun başarısını, indirme sayısını veya geliri tahmin etmiş gibi davranmaz.
+GameScout AI, bağımsız (indie) geliştiriciler ve küçük oyun ekipleri için geliştirilen **otonom bir AI Oyun Fırsat Araştırmacısıdır (Autonomous Game Opportunity Researcher)**. Kullanıcının bir tür seçmesine veya elle dosya yüklemesine gerek kalmadan; **Apple App Store (iTunes/RSS açık API'si)**, **Google Play açık mağaza verileri** ve **oyuncu toplulukları / sosyal medya (Reddit `r/AndroidGaming`, `r/iosgaming`, `r/gamedev` açık JSON/RSS akışları)** üzerindeki oyunları, puanları ve oyuncu yorumlarını tarar.
 
-İlk teslimat, sınırlı ve kaynağı bilinen bir veri kümesiyle uçtan uca çalışan bir portföy projesidir. Android ve iOS veri modelinde desteklenir; her iki platform için canlı ve kapsamlı veri erişimi MVP şartı değildir. Üretim erişimi, kaynak izinleri ve saha doğrulaması ayrı teslimatlardır.
+Yapay zeka (varsayılan olarak yerel **Ollama**, port/adaptör mimarisiyle **OpenAI / Gemini API** desteğine açık ve çevrimdışı durumda **Hibrit Analiz Motoru** yedekli) bu sinyalleri analiz ederek:
+1. **İnsanların şu an hangi türde nasıl bir oyun istediğini** ve mevcut oyunlarda nelerden bıktığını tespit eder,
+2. **"Şu oyun yapılabilir!"** diyerek somut oyun konsepti, temel oynanış döngüsü (core loop), çözülen oyuncu şikayetleri, riskler, prototip doğrulama planı ve doğrudan yorum kanıtlarıyla (`evidence_quotes`) fırsat raporu üretir.
 
 ## Yapılandırılabilir araştırma kapsamı
 

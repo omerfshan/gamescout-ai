@@ -1,0 +1,9 @@
+{
+  "id": "orchestra-demo",
+  "title": "İzole görev ve Codex inceleme denemesi",
+  "prompt": "Yalnızca demo/orchestra.txt dosyasını oluştur. İçeriği tam olarak ORCHESTRA READY ve ardından yeni satır olsun. Başka dosya değiştirme. Commit, push veya deploy yapma.",
+  "provider": "antigravity",
+  "allowed_paths": ["demo/orchestra.txt"],
+  "depends_on": [],
+  "checks": [["python3", "-c", "from pathlib import Path; assert Path('demo/orchestra.txt').read_text() == 'ORCHESTRA READY\\n'"]]
+}

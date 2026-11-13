@@ -1,0 +1,9 @@
+{
+  "id": "parallel-demo-ui",
+  "title": "Orkestra paralel arayüz görevi denemesi",
+  "prompt": "Bu yalnızca orkestra testidir, GameScout geliştirmesi değildir. Yalnızca demo/ui.txt dosyasını oluştur. İçeriği tam olarak UI READY ve ardından yeni satır olsun. Commit/push/deploy yapma.",
+  "provider": "antigravity",
+  "allowed_paths": ["demo/ui.txt"],
+  "depends_on": [],
+  "checks": [["python3", "-c", "from pathlib import Path; assert Path('demo/ui.txt').read_text() == 'UI READY\\n'"]]
+}
