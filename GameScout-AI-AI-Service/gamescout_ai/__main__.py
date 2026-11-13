@@ -27,6 +27,7 @@ def main(argv: list[str] | None = None) -> int:
 
         scout_cli = sub.add_parser('scout')
         scout_cli.add_argument('--provider', default='auto', choices=VALID_PROVIDERS)
+        scout_cli.add_argument('--genre', default='all')
         scout_cli.add_argument('--no-network', action='store_true', default=False)
 
         args = parser.parse_args(argv)
@@ -39,6 +40,7 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == 'scout':
             report = run_market_scout(
                 provider=args.provider,
+                genre=getattr(args, 'genre', 'all'),
                 allow_network=not args.no_network,
             )
             print(json.dumps(report.to_dict(), ensure_ascii=False))

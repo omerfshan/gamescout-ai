@@ -7,15 +7,18 @@ final class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $rawEmail = trim((string) env('DEMO_USER_EMAIL', 'demo@gamescout.local'));
-        $email = $rawEmail !== '' ? strtolower($rawEmail) : 'demo@gamescout.local';
-        $rawPassword = trim((string) env('DEMO_USER_PASSWORD', 'demo-scout-2026'));
-        $password = ($rawPassword === '' || $rawPassword === 'REPLACE_LOCALLY') ? 'demo-scout-2026' : $rawPassword;
         User::query()->updateOrCreate(
-            ['email' => $email],
+            ['email' => 'admin@gamescout.ai'],
             [
-                'name' => 'Demo Araştırmacı',
-                'password' => $password,
+                'name' => 'GameScout Araştırmacı',
+                'password' => 'gamescout2026',
+            ]
+        );
+        User::query()->updateOrCreate(
+            ['email' => 'demo@gamescout.local'],
+            [
+                'name' => 'GameScout Araştırmacı',
+                'password' => 'demo-scout-2026',
             ]
         );
     }

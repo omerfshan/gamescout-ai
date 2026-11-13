@@ -8,7 +8,7 @@ from gamescout_ai.domain.scout_models import (
     OpportunitySynthesizerPort,
     SignalCollectorPort,
 )
-from gamescout_ai.infrastructure.llm_providers import CompositeOpportunitySynthesizer
+from gamescout_ai.infrastructure.llm_providers import CompositeOpportunitySynthesizer, prepare_evidence_batch
 from gamescout_ai.infrastructure.scout_collectors import PublicMarketSignalCollector
 
 VALID_PROVIDERS = ('auto', 'ollama', 'openai', 'gemini', 'heuristic')
@@ -16,6 +16,7 @@ VALID_PROVIDERS = ('auto', 'ollama', 'openai', 'gemini', 'heuristic')
 
 def run_market_scout(
     provider: str = 'auto',
+    genre: str = 'all',
     allow_network: bool = True,
     collector: SignalCollectorPort | None = None,
     synthesizer: OpportunitySynthesizerPort | None = None,
@@ -30,11 +31,12 @@ def run_market_scout(
     signal_collector = collector or PublicMarketSignalCollector()
     opportunity_synthesizer = synthesizer or CompositeOpportunitySynthesizer()
 
-    batch = signal_collector.collect_signals(allow_network=allow_network)
+    batch = prepare_evidence_batch(signal_collector.collect_signals(allow_network=allow_network))
     outcome = opportunity_synthesizer.synthesize(
         batch=batch,
         provider=normalized_provider,
         allow_network=allow_network,
+        genre=genre,
     )
 
     now_utc = datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace('+00:00', 'Z')
@@ -50,4 +52,9 @@ def run_market_scout(
         top_genre_insights=outcome.top_genre_insights,
         actionable_game_proposals=outcome.actionable_game_proposals,
         warnings=warnings,
+        status=outcome.status,
+        data_origin=outcome.data_origin,
+        player_needs=outcome.player_needs,
+        model_metadata=outcome.model_metadata,
+        evidence_snapshot=list(batch.signals),
     )

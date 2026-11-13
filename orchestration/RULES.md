@@ -6,10 +6,17 @@
 
 - Codex başkandır: plan, görev dağıtımı, API sözleşmeleri, kabul koşulları,
   testler, bağımsız kod incelemesi ve entegrasyon kontrolü onundur.
-- Antigravity ve onun alt ajanları proje kodunu yazar; Codex'in bildirdiği
-  hataları düzeltir. Kendi işini onaylayamaz, kabul koşullarını gevşetemez.
-- Alt ajana başlamadan açık dosya sahipliği verilir. Ana Antigravity ajanı,
+- Proje kodunu Codex'in geliştirme ajanları yazar; her ajanın dosya sahipliği
+  ayrıdır. Antigravity bu çalışma akışında kullanılmaz. Kod yazan ajan kendi
+  işini onaylayamaz, kabul koşullarını gevşetemez.
+- Alt ajana başlamadan açık dosya sahipliği verilir. Ana geliştirme ajanı,
   alt ajanın dosyalarını eşzamanlı düzenlemez. Alt ajan daha fazla ajan açmaz.
+
+Geliştirme ajanları ürünün araştırmasını yapmaz: uygulama çalışırken internetten
+veri toplama kontrollü kaynak adaptörlerinin, oyuncu ihtiyaçlarını anlamlandırma
+ve oyun konsepti üretme uygulamanın yapılandırılmış modelinin sorumluluğudur.
+Kanıt doğrulama deterministik uygulama koduyla yapılır. Hazır konsept şablonu
+veya geliştirme ajanının cevabı, araştırma modelinin çıktısı gibi sunulamaz.
 
 ## Dosya sahipliği
 

@@ -7,11 +7,26 @@
 
 GameScout AI, bağımsız (indie) geliştiriciler ve küçük oyun ekipleri için geliştirilen **otonom bir AI Oyun Fırsat Araştırmacısıdır (Autonomous Game Opportunity Researcher)**. Kullanıcının bir tür seçmesine veya elle dosya yüklemesine gerek kalmadan; **Apple App Store (iTunes/RSS açık API'si)**, **Google Play açık mağaza verileri** ve **oyuncu toplulukları / sosyal medya (Reddit `r/AndroidGaming`, `r/iosgaming`, `r/gamedev` açık JSON/RSS akışları)** üzerindeki oyunları, puanları ve oyuncu yorumlarını tarar.
 
-Yapay zeka (varsayılan olarak yerel **Ollama**, port/adaptör mimarisiyle **OpenAI / Gemini API** desteğine açık ve çevrimdışı durumda **Hibrit Analiz Motoru** yedekli) bu sinyalleri analiz ederek:
+Yapay zeka (varsayılan olarak yerel **Ollama**, port/adaptör mimarisiyle açıkça etkinleştirilen **OpenAI / Gemini API** desteğine açık) bu sinyalleri analiz ederek:
 1. **İnsanların şu an hangi türde nasıl bir oyun istediğini** ve mevcut oyunlarda nelerden bıktığını tespit eder,
 2. **"Şu oyun yapılabilir!"** diyerek somut oyun konsepti, temel oynanış döngüsü (core loop), çözülen oyuncu şikayetleri, riskler, prototip doğrulama planı ve doğrudan yorum kanıtlarıyla (`evidence_quotes`) fırsat raporu üretir.
 
 ## Yapılandırılabilir araştırma kapsamı
+
+### Güncel model uygulaması ve sınırlar
+
+İnternetten gelen veri yalnızca yorum olmak zorunda değildir; oyun arayışı,
+öneri talebi ve topluluk tartışması da girdidir. Uygulamanın kendi modeli önce
+kanıt kimliklerine bağlı oyuncu ihtiyaçlarını, ardından yeni konsept hipotezlerini
+üretir. Geliştirme ajanları bu araştırmayı yapmaz, sistemin kodunu yazar.
+Model/kanıt yokluğunda hazır fikir yedeği çalıştırılmaz. Model ağırlıkları henüz
+eğitilmemiştir; güncel veri getirmek eğitim olarak adlandırılmaz.
+
+Yukarıdaki otonom geniş pazar kapsamı hedeftir. Mevcut adaptör kayıtları sınırlı
+App Store RSS ve mobil Reddit JSON/RSS adaylarıdır; tüm interneti temsil etmez.
+Google Play erişimi doğrulanmadığı için kullanılamaz olarak gösterilir. Canlı
+erişim, haklar ve model doğruluğu ayrıca sınanır. Kaynak metinleri değiştirilmez;
+isteğe bağlı çeviri özgün alıntıdan ayrı tutulur.
 
 Her çalışma, sonradan değişmeyen bir kapsam anlık görüntüsü saklar:
 

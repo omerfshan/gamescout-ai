@@ -10,9 +10,9 @@ final class ScoutController
     {
         $ownerId = (int) $request->user()->getAuthIdentifier();
         $meta = [
-            'configured_provider' => (string) env('AI_PROVIDER', 'auto'),
-            'ollama_base_url' => (string) env('OLLAMA_BASE_URL', 'http://127.0.0.1:11434'),
-            'ollama_model' => (string) env('OLLAMA_MODEL', 'qwen2.5:3b'),
+            'configured_provider' => (string) config('scout.provider', 'ollama'),
+            'ollama_model' => (string) config('scout.ollama_model', 'qwen3:8b'),
+            'allowed_providers' => array_values(config('scout.allowed_providers', ['ollama'])),
             'api_configured' => trim((string) env('AI_API_KEY', '')) !== '',
         ];
         return response()->json($useCase->execute($ownerId, $meta), 200);
@@ -20,7 +20,8 @@ final class ScoutController
     public function run(RunScoutRequest $request, RunMarketScout $useCase): JsonResponse
     {
         $ownerId = (int) $request->user()->getAuthIdentifier();
-        $provider = (string) ($request->validated('provider') ?? env('AI_PROVIDER', 'auto'));
-        return response()->json($useCase->execute($ownerId, $provider), 201);
+        $provider = (string) ($request->validated('provider') ?? 'auto');
+        $genre = (string) ($request->validated('genre') ?? 'all');
+        return response()->json($useCase->execute($ownerId, $provider, $genre), 201);
     }
 }

@@ -9,6 +9,7 @@ export default function App() {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [checkingSession, setCheckingSession] = useState<boolean>(() => getAuthToken() !== null);
   const [sessionNotice, setSessionNotice] = useState('');
+  const [loggingOut, setLoggingOut] = useState(false);
 
   useEffect(() => {
     return onUnauthorized(() => {
@@ -53,30 +54,69 @@ export default function App() {
   }
 
   async function handleLogout() {
-    await logout();
-    setSessionNotice('');
-    setUser(null);
+    setLoggingOut(true);
+    try {
+      await logout();
+      setSessionNotice('');
+      setUser(null);
+    } finally {
+      setLoggingOut(false);
+    }
   }
 
-  return <div className="app-shell">
-    <aside className="sidebar">
-      <a className="brand" href="/" aria-label="GameScout AI ana sayfa"><span className="brand-mark">G</span><span>GameScout<span className="brand-ai"> AI</span></span></a>
-      <p className="sidebar-caption">Araştırmadan fikre.</p>
-      <nav aria-label="Ana gezinme"><a href="#main" aria-current="page">◈ <span>Oyun keşfi</span></a></nav>
-      <div className="sidebar-footer">
-        <span className="status-dot" />
-        {user ? <>{user.name}<small>{user.email}</small></> : <>Oturum bekleniyor<small>Kullanıcıya özel katalog</small></>}
+  return <div className="app-layout">
+    <header className="top-navbar">
+      <div className="top-navbar__inner">
+        <a className="brand-logo" href="/" aria-label="GameScout AI ana sayfa">
+          <span className="brand-logo__mark" aria-hidden="true">✦</span>
+          <div className="brand-logo__text">
+            <span className="brand-logo__title">GameScout <em>AI</em></span>
+            <span className="brand-logo__subtitle">Otonom Pazar &amp; Oyun Fırsat İstihbaratı</span>
+          </div>
+        </a>
+
+        {user && (
+          <div className="top-navbar__right">
+            <div className="navbar-user-controls" aria-label="Aktif araştırmacı oturumu">
+              <div className="navbar-user-badge">
+                <span className="navbar-user-avatar" aria-hidden="true">{user.name.charAt(0).toUpperCase()}</span>
+                <div className="navbar-user-meta">
+                  <strong>{user.name}</strong>
+                  <span>{user.email}</span>
+                </div>
+              </div>
+              <button
+                type="button"
+                className="navbar-logout-btn"
+                onClick={handleLogout}
+                disabled={loggingOut}
+              >
+                {loggingOut ? 'Çıkış yapılıyor…' : 'Çıkış Yap'}
+              </button>
+            </div>
+          </div>
+        )}
       </div>
-    </aside>
-    <main id="main" className="main-content">
+    </header>
+
+    <main id="main" className="main-workspace">
       {checkingSession ? (
-        <p className="empty-state" role="status">Oturum doğrulanıyor…</p>
+        <div className="session-loader" role="status">
+          <div className="radar-spinner" aria-hidden="true" />
+          <p>Araştırmacı oturumu doğrulanıyor…</p>
+        </div>
       ) : user ? (
         <GamesPage user={user} onLogout={handleLogout} />
       ) : (
         <LoginForm onAuthenticated={handleAuthenticated} sessionNotice={sessionNotice} />
       )}
-      <footer className="page-footer">GameScout AI · Kaynak olmadan iddia yok.</footer>
     </main>
+
+    <footer className="workspace-footer">
+      <div className="workspace-footer__inner">
+        <span><strong>GameScout AI</strong> · Kanıta Dayalı Otonom Oyun Fırsat İstihbaratı</span>
+        <span>Apple App Store · Google Play · Reddit · Yerel Ollama LLM</span>
+      </div>
+    </footer>
   </div>;
 }
